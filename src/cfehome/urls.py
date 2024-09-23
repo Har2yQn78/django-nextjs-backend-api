@@ -16,10 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.http import HttpResponse
 from .api import api
+
+
+# Define the health check view
+def health_check(request):
+    return HttpResponse("OK")
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", api.urls)
+    path("api/", api.urls),
+    path("health/", health_check),  # Add the health check endpoint
 ]
